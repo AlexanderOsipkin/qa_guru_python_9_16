@@ -1,0 +1,21 @@
+import pytest
+from selene import browser, be, have
+
+
+@pytest.mark.desktop
+def test_desktop_skip(is_desktop_browser):
+    if not is_desktop_browser:
+        pytest.skip(reason='Тест для экрана компьютера')
+    browser.open('https://github.com')
+    browser.element('.HeaderMenu-link--sign-in').click()
+    browser.element('#login').should(have.text('Sign in to GitHub'))
+
+
+@pytest.mark.mobile
+def test_mobile_skip(is_mobile_browser):
+    if not is_mobile_browser:
+        pytest.skip(reason='Тест для экрана телефона')
+    browser.open('https://github.com')
+    browser.element('.js-details-target.Button--link').click()
+    browser.element('.HeaderMenu-link--sign-in').click()
+    browser.element('#login').should(have.text('Sign in to GitHub'))
