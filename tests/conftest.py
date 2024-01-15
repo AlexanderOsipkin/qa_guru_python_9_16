@@ -1,6 +1,6 @@
 import pytest
 
-from selene.support.shared import browser
+from selene import browser
 
 
 @pytest.fixture(params=[(1920, 1080), (1280, 720)])
